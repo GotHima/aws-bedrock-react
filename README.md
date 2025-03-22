@@ -1,11 +1,25 @@
 # Travel Destination Recommender
 
+1. [Background](#background)
+   - [Tech stack](#tech-stack)
+   - [AWS services used (via Amplify)](#aws-services-used-via-amplify)
+2. [AWS account setup](#aws-account-setup)
+   - [Amazon Bedrock](#amazon-bedrock)
+   - [AWS CLI](#aws-cli)
+3. [Contents in this repo](#contents-in-this-repo)
+   - [1. AWS Amplify](#1-aws-amplify)
+   - [2. React UI](#2-react-ui)
+4. [How to run the app](#how-to-run-the-app)
+   - [First time](#first-time)
+   - [Development](#development)
+   - [[Optional] Deployment](#optional-deployment)
+
 ## Background
 
 This app was created based on the tutorial:  
-https://www.youtube.com/watch?v=Ao5TF4yUNXQ
+https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-amplify-bedrock-cognito-gen-ai/
 
-## Tech stack
+### Tech stack
 
 - AWS Amplify
 - AWS services
@@ -22,9 +36,9 @@ https://www.youtube.com/watch?v=Ao5TF4yUNXQ
 
 ### Amazon Bedrock
 
-- Go to Amazon Bedrock service in AWS console
-- Choose 'Claude 3 Sonnet' from model catalog
-- Request for access
+- go to Amazon Bedrock service in AWS console
+- choose 'Claude 3 Sonnet' from model catalog
+- request for access
 
 ### AWS CLI
 
@@ -32,26 +46,39 @@ https://www.youtube.com/watch?v=Ao5TF4yUNXQ
 
 ## Contents in this repo
 
-1. AWS Amplify
+### 1. AWS Amplify
 
-- folder `amplify/` (created by `npm create amplify@latest -y`)
-- Lambda functions
-  - `request()`: to construct a POST request (prompt) to Bedrock
-  - `response()`: to parse the response from Bedrock and return to client
+- source folder `amplify/` (created by `npm create amplify@latest -y`)
+- `data/bedrock.js`
+  - code for Lambda functions
+  - `request()`: constructs a POST request using user-provided input (prompt) and forward it to Bedrock
+  - `response()`: parses the response from Bedrock and returns it to client
 - `backend.ts`
-  - add Bedrock as a HTTP data source
-  - grant policy to invoke it
-  - build a custom query to use the data source
-- `auth/resource.ts`
+  - adds Bedrock as a HTTP data source
+  - grants policy to invoke it
+- `data/resource.ts`
   - create a GraphQL API custom query by creating a schema/type to connect to the data source (Bedrock)
-  - bootstrap before deployment, run `npx aws-cdk@latest bootstrap aws://132358260776/ap-southeast-1`
-  - to deploy to sanbox, run `npx ampx sandbox`
-  - an output file `amplify_outputs.json` will be created in the root dir
+  - builds a custom query to use the data source
 
-2. React UI
+### 2. React UI
 
-- folder `src/` (created by `npm install aws-amplify @aws-amplify/ui-react`)
-- use the `Authenticator` component to wrap the app to include sign-up/sign-in/reset password/MFA features
-- invoke the GraphQL API via Amplify client to get recommendations from Bedrock
-- copy the CSS styles from the JS tutorial sample in AWS Developer Center to apply
-- deploy the static site
+- source folder `src/` (created by `npm install aws-amplify @aws-amplify/ui-react` and followed by `npm i`)
+- the CSS styles were copied from the JS tutorial sample in AWS Developer Center
+- uses the `Authenticator` component from Amplify to wrap the app to include sign-up/sign-in/reset password/MFA functionality
+- invokes the GraphQL API via Amplify client to get recommendations from Bedrock
+
+## How to run the app
+
+### First time
+
+- bootstrap an AWS environment for use with AWS CDK, run `npx aws-cdk@latest bootstrap aws://{your-aws-account-id}/{aws-region}`
+
+### Development
+
+- to deploy to the sandbox environment, run `npx ampx sandbox`
+- an output file `amplify_outputs.json` will be created in the root dir
+- it will continue to watch for any new changes and redeploy it
+
+### [Optional] Deployment
+
+- you can deploy the app as a static site using AWS Amplify
