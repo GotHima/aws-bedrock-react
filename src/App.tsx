@@ -45,11 +45,11 @@ function App() {
       <div className="header-container">
         <h1 className="main-header">
           Meet Your Personal
-          <span className="highlight"> Travel Destination Generator</span>
+          <span className="highlight"> Travel Destination Recommender</span>
         </h1>
         <p className="description">
           Simply type a few interests using the format interest1, interest2, etc... and
-          the generator will comeback with great destinations for you.
+          the recommender will comeback with great destinations for you.
         </p>
       </div>
 
