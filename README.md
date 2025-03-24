@@ -75,9 +75,10 @@ https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-
 
 ### Development
 
-- to deploy to the sandbox environment, run `npx ampx sandbox`
+- to deploy the backend to the sandbox environment, run `npx ampx sandbox`
 - an output file `amplify_outputs.json` will be created in the root dir
 - it will continue to watch for any new changes and redeploy it
+- as for the frontend (React), run `npm run dev`
 
 ### [Optional] Deployment
 

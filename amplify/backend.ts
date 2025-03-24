@@ -10,10 +10,10 @@ const backend = defineBackend({
 
 const bedrockDataSource = backend.data.resources.graphqlApi.addHttpDataSource(
   "bedrockDS",
-  "https://bedrock-runtime.ap-southeast-1.amazonaws.com",
+  "https://bedrock-runtime.us-east-1.amazonaws.com",
   {
     authorizationConfig: {
-      signingRegion: "ap-southeast-1",
+      signingRegion: "us-east-1",
       signingServiceName: "bedrock",
     },
   }
@@ -22,7 +22,7 @@ const bedrockDataSource = backend.data.resources.graphqlApi.addHttpDataSource(
 bedrockDataSource.grantPrincipal.addToPrincipalPolicy(
   new PolicyStatement({
     resources: [
-      "arn:aws:bedrock:ap-southeast-1::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0",
+      "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0",
     ],
     actions: ["bedrock:InvokeModel"],
   })

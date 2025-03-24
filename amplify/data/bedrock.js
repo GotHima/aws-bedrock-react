@@ -30,7 +30,6 @@ export function request(ctx) {
 }
 
 export function response(ctx) {
-  console.log(ctx.result.body);
   const parsedBody = JSON.parse(ctx.result.body);
   const res = {
     body: parsedBody.content[0].text,
